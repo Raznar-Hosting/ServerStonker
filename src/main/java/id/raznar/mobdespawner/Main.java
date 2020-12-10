@@ -28,7 +28,19 @@ public final class Main extends JavaPlugin implements Listener {
                         if(entity == null)
                             return;
                         if(!entity.isCustomNameVisible()) {
-g
+                            if (entity instanceof Wolf || entity instanceof Horse) {
+                                if (!((Tameable) entity).isTamed()) {
+                                    if (!(entity instanceof Villager)) {
+                                        for (Entity nearby : entity.getNearbyEntities(2d, 2d, 2d)) {
+                                            if (nearby instanceof Player)
+                                                return;
+                                            Chunk chunk = entity.getLocation().getChunk();
+                                            if (chunk.isLoaded()) {
+                                                entity.remove();
+                                                chunk.unload(true);
+                                            } else {
+                                                entity.remove();
+                                            }
                                         }
                                     }
                                 }
