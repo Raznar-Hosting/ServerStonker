@@ -1,0 +1,7 @@
+name: MobDespawner
+version: 1.0-Beta
+main: id.raznar.mobdespawner.Main
+api-version: 1.16
+authors: [ xAbhista ]
+description: Despawn Mob whenever there's no player in the chunk every 10 seconds
+website: https://raznar.id
