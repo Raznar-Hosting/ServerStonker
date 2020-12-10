@@ -64,20 +64,19 @@ public final class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
         Entity entity = e.getEntity();
-        if(entity.isCustomNameVisible()) {
-            if (entity instanceof Wolf || entity instanceof Horse) {
-                if (!((Tameable) entity).isTamed()) {
-                    if (!(entity instanceof Villager)) {
-                        e.setCancelled(true);
-                    }
-                } else {
-                    ((Tameable) entity).setAI(true);
+        if(entity.isCustomNameVisible())
+            return;
+        if (entity instanceof Wolf || entity instanceof Horse) {
+            if (!((Tameable) entity).isTamed()) {
+                if (!(entity instanceof Villager)) {
+                    e.setCancelled(true);
                 }
+            } else {
+                ((Tameable) entity).setAI(true);
             }
-        } else {
-            if (entity instanceof LivingEntity) {
-                ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.001);
-            }
+        }
+        if (entity instanceof LivingEntity) {
+            ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.001);
         }
     }
 }
