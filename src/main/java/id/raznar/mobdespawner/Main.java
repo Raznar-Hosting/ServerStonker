@@ -67,7 +67,7 @@ public final class Main extends JavaPlugin implements Listener {
         if(entity.isCustomNameVisible())
             return;
         if (entity instanceof Wolf || entity instanceof Horse) {
-            if (!((Tameable) entity).isTamed()) {
+            if (!((Tameable) entity).isAdult()) {
                 if (!(entity instanceof Villager)) {
                     e.setCancelled(true);
                 }
