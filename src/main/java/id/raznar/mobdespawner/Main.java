@@ -64,7 +64,10 @@ public final class Main extends JavaPlugin implements Listener {
             } else {
                 e.setCancelled(true);
             }
-        } else if (entity instanceof LivingEntity) {
+        } else {
+            // Prevent Mobs Spawn
+            e.setCancelled(true);
+        } if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.001);
         }
     }
