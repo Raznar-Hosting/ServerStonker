@@ -6,10 +6,9 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Objects;
 
 public final class Main extends JavaPlugin implements Listener {
 
@@ -22,21 +21,21 @@ public final class Main extends JavaPlugin implements Listener {
         this.getLogger().info("Try our hosting! https://raznar.id");
         this.getLogger().info("--------------------------------");
 
-        this.getServer().getScheduler().runTaskTimer(this, () -> {
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (World world : this.getServer().getWorlds()) {
-                world.getEntities().stream()
-                        .filter(Objects::nonNull)
-                        .filter(entity -> entity instanceof Wolf || entity instanceof Horse || entity instanceof Villager)
-                        .forEach(entity -> {
-                            if (entity instanceof Wolf || entity instanceof Horse) {
-                                // only removes wild wolfs and horses
-                                if (!((Tameable) entity).isTamed()) {
-                                    this.removeEntity(entity);
-                                }
-                            } else {
-                                this.removeEntity(entity);
-                            }
-                        });
+                for (Entity entity : world.getEntities()) {
+                    if (entity instanceof Wolf || entity instanceof Horse) {
+                        // only removes wild wolfs and horses
+                        Tameable tameable = (Tameable) entity;
+                        if (!tameable.isTamed()) {
+                            this.removeEntity(tameable);
+                        }
+                    } else if (entity instanceof Villager) {
+                        return;
+                    } else {
+                        this.removeEntity(entity);
+                    }
+                }
             }
         }, 0, 200);
     }
@@ -53,22 +52,21 @@ public final class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
         Entity entity = e.getEntity();
-        if (entity.isCustomNameVisible()) {
-            return;
-        }
-
-        if (entity instanceof Wolf || entity instanceof Horse) {
-            Tameable tameable = (Tameable) entity;
-            if (tameable.isAdult()) {
-                tameable.setAI(true);
-            } else {
-                e.setCancelled(true);
-            }
-        } else if (entity instanceof LivingEntity) {
-            ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.001);
+        if (entity instanceof LivingEntity) {
+            ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.0000000001);
         }
     }
 
+    @EventHandler
+    public void onCreatureSpawn(CreatureSpawnEvent e) {
+        Entity entity = e.getEntity();
+        boolean nearbyPlayer = entity.getNearbyEntities(48, 48, 48).stream().anyMatch(nearby -> nearby instanceof Player);
+        CreatureSpawnEvent.SpawnReason spawnReason = e.getSpawnReason();
+        if(spawnReason == CreatureSpawnEvent.SpawnReason.SPAWNER || spawnReason == CreatureSpawnEvent.SpawnReason.SPAWNER_EGG)
+            return;
+        if(!entity.isCustomNameVisible() && !nearbyPlayer)
+            e.setCancelled(true);
+    }
     private void removeEntity(Entity entity) {
         // let's not remove entities if it is near a player
         boolean nearbyPlayer = entity.getNearbyEntities(48, 48, 48).stream().anyMatch(nearby -> nearby instanceof Player);
