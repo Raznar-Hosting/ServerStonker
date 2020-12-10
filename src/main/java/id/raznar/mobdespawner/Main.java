@@ -52,6 +52,13 @@ public final class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
         Entity entity = e.getEntity();
+        if(entity.isCustomNameVisible())
+            return;
+        if(entity instanceof Horse || entity instanceof Wolf) {
+            Tameable tameable = (Tameable) entity;
+            if(!tameable.isTamed())
+                tameable.remove();
+        }
         if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.0000000001);
         }
