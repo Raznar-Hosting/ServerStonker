@@ -1,7 +1,7 @@
 name: MobDespawner
 version: 1.2-Beta
 main: id.raznar.mobdespawner.Main
-api-version: 1.15.2
+api-version: 1.15
 authors: [ xAbhista, BadAccuracyID ]
 description: Despawn Entity whenever there's no player in the chunk every 5 seconds
 website: https://raznar.id
