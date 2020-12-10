@@ -64,17 +64,14 @@ public final class Main extends JavaPlugin implements Listener {
             } else {
                 e.setCancelled(true);
             }
-        } else {
-            // Prevent Mobs Spawn
-            e.setCancelled(true);
-        } if (entity instanceof LivingEntity) {
+        } else if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.001);
         }
     }
 
     private void removeEntity(Entity entity) {
         // let's not remove entities if it is near a player
-        boolean nearbyPlayer = entity.getNearbyEntities(2d, 2d, 2d).stream().anyMatch(nearby -> nearby instanceof Player);
+        boolean nearbyPlayer = entity.getNearbyEntities(48, 48, 48).stream().anyMatch(nearby -> nearby instanceof Player);
         if (!nearbyPlayer) {
             Chunk chunk = entity.getLocation().getChunk();
             if (chunk.isLoaded()) {
