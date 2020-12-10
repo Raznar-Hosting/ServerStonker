@@ -1,4 +1,4 @@
-package id.raznar.mobdespawner;
+package id.raznar.entitydespawner;
 
 import org.bukkit.Chunk;
 import org.bukkit.World;

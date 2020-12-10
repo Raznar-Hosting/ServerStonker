@@ -1,7 +1,7 @@
-name: MobDespawner
+name: EntityDespawner
 version: 1.2-Beta
-main: id.raznar.mobdespawner.Main
+main: id.raznar.entitydespawner.Main
 api-version: 1.15
 authors: [ xAbhista, BadAccuracyID ]
-description: Despawn Entity whenever there's no player in the chunk every 5 seconds
+description: Make your Minecraft Server TPS STONKS in a realtime
 website: https://raznar.id
