@@ -62,10 +62,9 @@ public final class Main extends JavaPlugin implements Listener {
         Entity entity = e.getEntity();
         boolean nearbyPlayer = entity.getNearbyEntities(48, 48, 48).stream().anyMatch(nearby -> nearby instanceof Player);
         CreatureSpawnEvent.SpawnReason spawnReason = e.getSpawnReason();
-        if(spawnReason == CreatureSpawnEvent.SpawnReason.SPAWNER || spawnReason == CreatureSpawnEvent.SpawnReason.SPAWNER_EGG)
-            return;
-        if(!entity.isCustomNameVisible() && !nearbyPlayer)
-            e.setCancelled(true);
+        if(spawnReason == CreatureSpawnEvent.SpawnReason.NATURAL)
+            if(!entity.isCustomNameVisible() && !nearbyPlayer)
+                e.setCancelled(true);
     }
     private void removeEntity(Entity entity) {
         // let's not remove entities if it is near a player
