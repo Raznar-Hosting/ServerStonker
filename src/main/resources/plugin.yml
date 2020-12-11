@@ -1,7 +1,7 @@
 name: EntityDespawner
 version: 1.2-Beta
 main: id.raznar.entitydespawner.Main
-api-version: 1.15
+api-version: 1.16
 authors: [ xAbhista, BadAccuracyID ]
 description: Make your Minecraft Server TPS STONKS in a realtime
 website: https://raznar.id
