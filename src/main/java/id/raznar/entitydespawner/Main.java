@@ -37,7 +37,7 @@ public final class Main extends JavaPlugin implements Listener {
                     }
                 }
             }
-        }, 0, 200);
+        }, 0, 10 * 20);
     }
 
     @Override
@@ -52,13 +52,16 @@ public final class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
         Entity entity = e.getEntity();
+        // Cancel if it's a custom mob
         if(entity.isCustomNameVisible())
             return;
         if(entity instanceof Horse || entity instanceof Wolf) {
             Tameable tameable = (Tameable) entity;
+            // Only remove Wild Wolf & Horse
             if(!tameable.isTamed())
                 tameable.remove();
         }
+        // Disable Mob AI by changing their movement speed
         if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.0000000001);
         }
@@ -69,7 +72,9 @@ public final class Main extends JavaPlugin implements Listener {
         Entity entity = e.getEntity();
         boolean nearbyPlayer = entity.getNearbyEntities(48, 48, 48).stream().anyMatch(nearby -> nearby instanceof Player);
         CreatureSpawnEvent.SpawnReason spawnReason = e.getSpawnReason();
+        // Disable Mobs Spawn naturally
         if(spawnReason == CreatureSpawnEvent.SpawnReason.NATURAL)
+            // let's remove the entitities if it is not near a player
             if(!entity.isCustomNameVisible() && !nearbyPlayer)
                 e.setCancelled(true);
     }
