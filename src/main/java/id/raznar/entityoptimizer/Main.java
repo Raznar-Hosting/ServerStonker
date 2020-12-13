@@ -59,6 +59,13 @@ public final class Main extends JavaPlugin implements Listener {
             return;
         // Disable Mob AI by changing their movement speed
         if (entity instanceof LivingEntity) {
+            Tameable tameable = (Tameable) entity;
+            if(entity instanceof Wolf || entity instanceof Horse) {
+                if (tameable.isTamed())
+                    return;
+                else
+                    ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
+            }
             ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
         }
     }
