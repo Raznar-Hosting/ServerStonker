@@ -1,4 +1,4 @@
-package id.raznar.entitydespawner;
+package id.raznar.entityoptimizer;
 
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -17,7 +17,7 @@ public final class Main extends JavaPlugin implements Listener {
         this.getLogger().info("--------------------------------");
         this.getLogger().info("Loading Events..");
         this.getServer().getPluginManager().registerEvents(this, this);
-        this.getLogger().info("Mob Despawner made by Raznar Lab Successfully loaded!");
+        this.getLogger().info("Entity Optimizer made by Raznar Lab Successfully loaded!");
         this.getLogger().info("Try our hosting! https://raznar.id");
         this.getLogger().info("--------------------------------");
 
@@ -46,7 +46,7 @@ public final class Main extends JavaPlugin implements Listener {
     public void onDisable() {
         this.getLogger().info("--------------------------------");
         this.getLogger().info("Disabling Events..");
-        this.getLogger().info("Mob Despawner made by Raznar Lab Successfully unloaded!");
+        this.getLogger().info("Entity Optimizer made by Raznar Lab Successfully unloaded!");
         this.getLogger().info("Try our hosting! https://raznar.id");
         this.getLogger().info("--------------------------------");
     }
@@ -59,7 +59,7 @@ public final class Main extends JavaPlugin implements Listener {
             return;
         // Disable Mob AI by changing their movement speed
         if (entity instanceof LivingEntity) {
-            ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.0000000001);
+            ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
         }
     }
 
