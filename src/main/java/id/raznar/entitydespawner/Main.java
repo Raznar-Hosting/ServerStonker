@@ -57,12 +57,6 @@ public final class Main extends JavaPlugin implements Listener {
         // Cancel if it's a custom mob
         if(entity.isCustomNameVisible())
             return;
-        if(entity instanceof Horse || entity instanceof Wolf) {
-            Tameable tameable = (Tameable) entity;
-            // Only remove Wild Wolf & Horse
-            if(!tameable.isTamed())
-                tameable.remove();
-        }
         // Disable Mob AI by changing their movement speed
         if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.0000000001);
