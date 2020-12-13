@@ -18,7 +18,7 @@ public final class Main extends JavaPlugin implements Listener {
         this.getLogger().info("Loading Events..");
         this.getServer().getPluginManager().registerEvents(this, this);
         this.getLogger().info("Entity Optimizer made by Raznar Lab Successfully loaded!");
-        this.getLogger().info("Try our hosting! https://raznar.id");
+        this.getLogger().info("Try our hosting! https://hosting.raznar.id");
         this.getLogger().info("--------------------------------");
 
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
@@ -47,7 +47,7 @@ public final class Main extends JavaPlugin implements Listener {
         this.getLogger().info("--------------------------------");
         this.getLogger().info("Disabling Events..");
         this.getLogger().info("Entity Optimizer made by Raznar Lab Successfully unloaded!");
-        this.getLogger().info("Try our hosting! https://raznar.id");
+        this.getLogger().info("Try our hosting! https://hosting.raznar.id");
         this.getLogger().info("--------------------------------");
     }
 
