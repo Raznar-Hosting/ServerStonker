@@ -24,9 +24,9 @@ public final class Main extends JavaPlugin implements Listener {
         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (World world : this.getServer().getWorlds()) {
                 for (Entity entity : world.getEntities()) {
-                    if (entity instanceof Player)
+                    if (entity instanceof Player) {
                         return;
-                    if (entity instanceof Wolf || entity instanceof Horse) {
+                    } else if (entity instanceof Wolf || entity instanceof Horse) {
                         // only removes wild wolfs and horses
                         Tameable tameable = (Tameable) entity;
                         if (!tameable.isTamed()) {
