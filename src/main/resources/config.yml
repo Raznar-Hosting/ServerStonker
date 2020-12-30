@@ -1,0 +1,32 @@
+##########################################################################################################
+#  _________                                 ________          __  .__        .__                        #
+#  /   _____/ ______________  __ ___________  \_____  \ _______/  |_|__| _____ |__|_______ ___________   #
+#  \_____  \_/ __ \_  __ \  \/ // __ \_  __ \  /   |   \\____ \   __\  |/     \|  \___   // __ \_  __ \  #
+#  /        \  ___/|  | \/\   /\  ___/|  | \/ /    |    \  |_> >  | |  |  Y Y  \  |/    /\  ___/|  | \/  #
+#    /_______  /\___  >__|    \_/  \___  >__|    \_______  /   __/|__| |__|__|_|  /__/_____ \\___  >__|  #
+#    \/     \/                 \/                \/|__|                 \/         \/    \/              #
+##########################################################################################################
+# Save Progress automatically every x Minutes
+auto-save: 1
+# Seconds
+# Kill entities in unloaded chunks automatically every x Minutes
+schedule-duration: 10
+# Enable Mob Move
+mob-movement: false
+# Enable Mob Interact
+mob-interaction: false
+# Enable Mob Spawn Naturally
+natural-spawn: false
+# Enable Mob Spawn while player loads a chunk
+chunkload-spawn: false
+# Enable Entity Optimizer at specified world
+world: all
+# Prevent specified Mob getting killed while Entity Optimizer is running
+whitelist-mob: []
+# Prevent specified Tameable Mob getting killed while Entity Optimizer is running
+whitelist-tameable-mob:
+  - Wolf
+  - Horse
+##########################################################################################################
+#                   Copyright © 2020, Raznar Lab, or its associates. All Rights Reserved.                #
+##########################################################################################################

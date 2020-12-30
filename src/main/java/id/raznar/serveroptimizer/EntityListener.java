@@ -1,4 +1,4 @@
-package id.raznar.entityoptimizer;
+package id.raznar.serveroptimizer;
 
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -8,21 +8,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.event.entity.EntityTargetEvent;
 
-public final class Main extends JavaPlugin implements Listener {
+public class EntityListener implements Listener {
+    private final Main plugin;
+    public EntityListener(Main plugin) {
+        this.plugin = plugin;
+    }
 
-    @Override
-    public void onEnable() {
-        this.getLogger().info("--------------------------------");
-        this.getLogger().info("Loading Events..");
-        this.getServer().getPluginManager().registerEvents(this, this);
-        this.getLogger().info("Entity Optimizer made by Raznar Lab Successfully loaded!");
-        this.getLogger().info("Try our hosting! https://hosting.raznar.id");
-        this.getLogger().info("--------------------------------");
-
-        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            for (World world : this.getServer().getWorlds()) {
+    /**
+     * Scheduler
+     */
+    public void entitySchedule() {
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+            for (World world : plugin.getServer().getWorlds()) {
                 for (Entity entity : world.getEntities()) {
                     if (entity instanceof Player) {
                         return;
@@ -42,45 +41,52 @@ public final class Main extends JavaPlugin implements Listener {
         }, 0, 10 * 20);
     }
 
-    @Override
-    public void onDisable() {
-        this.getLogger().info("--------------------------------");
-        this.getLogger().info("Disabling Events..");
-        this.getLogger().info("Entity Optimizer made by Raznar Lab Successfully unloaded!");
-        this.getLogger().info("Try our hosting! https://hosting.raznar.id");
-        this.getLogger().info("--------------------------------");
-    }
-
+    /**
+     * Attributes changes
+     *
+     */
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
         Entity entity = e.getEntity();
         // Cancel if it's a custom mob
-        if(entity.isCustomNameVisible())
+        if(entity.isCustomNameVisible()) {
             return;
+        }
         // Disable Mob AI by changing their movement speed
         if (entity instanceof LivingEntity) {
-            Tameable tameable = (Tameable) entity;
             if(entity instanceof Wolf || entity instanceof Horse) {
-                if (tameable.isTamed())
-                    return;
-                else
+                Tameable tameable = (Tameable) entity;
+                if (!tameable.isTamed())
                     ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
+            } else {
+                ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
             }
-            ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
         }
     }
 
+    /**
+     *
+     * Despawn Creature
+     */
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent e) {
-        Entity entity = e.getEntity();
-        boolean nearbyPlayer = entity.getNearbyEntities(48, 48, 48).stream().anyMatch(nearby -> nearby instanceof Player);
-        CreatureSpawnEvent.SpawnReason spawnReason = e.getSpawnReason();
         // Disable Mobs Spawn naturally
-        if(spawnReason == CreatureSpawnEvent.SpawnReason.NATURAL)
-            // let's remove the entitities if it is not near a player
-            if(!entity.isCustomNameVisible() && !nearbyPlayer)
+        if (!e.getEntity().isCustomNameVisible()) {
+            if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CHUNK_GEN || e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL)
                 e.setCancelled(true);
+        }
     }
+    @EventHandler
+    public void onEntityTarget(EntityTargetEvent e) {
+        // Disable Mob to interact
+        if(e.getEntity().isCustomNameVisible()) {
+            return;
+        }
+        if(e.getTarget() instanceof LivingEntity) {
+            e.setCancelled(true);
+        }
+    }
+
     private void removeEntity(Entity entity) {
         // let's not remove entities if it is near a player
         boolean nearbyPlayer = entity.getNearbyEntities(48, 48, 48).stream().anyMatch(nearby -> nearby instanceof Player);

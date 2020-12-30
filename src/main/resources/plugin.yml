@@ -1,7 +1,6 @@
-name: EntityOptimizer
-version: 1.2-Beta
-main: id.raznar.entityoptimizer.Main
-api-version: 1.16
+name: ServerOptimizer
+version: 1.3-Beta
+main: id.raznar.serveroptimizer.Main
 authors: [ xAbhista, BadAccuracyID ]
 description: Make your Minecraft Server TPS STONKS in a realtime
-website: https://raznar.id
+website: https://lab.raznar.id
