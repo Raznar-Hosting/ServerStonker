@@ -25,7 +25,9 @@ public class EntityListener implements Listener {
     public void entitySchedule() {
         int Delay = Config.get().getInt("schedule-duration");
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-            plugin.getLogger().info(Utils.color("&bExecuting scheduled repeating task"));
+            if(Config.get().getString("schedule-log").equals("true")) {
+                plugin.getLogger().info(Utils.color("&bExecuting scheduled repeating task"));
+            }
             for (World world : plugin.getServer().getWorlds()) {
                 for (Entity entity : world.getEntities()) {
                     EntityType type = entity.getType();
