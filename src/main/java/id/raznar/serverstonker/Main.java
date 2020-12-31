@@ -1,4 +1,4 @@
-package id.raznar.serveroptimizer;
+package id.raznar.serverstonker;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -9,7 +9,7 @@ public final class Main extends JavaPlugin {
         this.loadConfig();
         this.loadListener();
         this.getLogger().info("--------------------------------");
-        this.getLogger().info("Server Optimizer made by Raznar Lab Successfully loaded!");
+        this.getLogger().info("Server Stonker made by Raznar Lab Successfully loaded!");
         this.getLogger().info("Try our hosting! https://hosting.raznar.id/discord");
         this.getLogger().info("--------------------------------");
     }
@@ -17,7 +17,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         this.getLogger().info("--------------------------------");
-        this.getLogger().info("Server Optimizer made by Raznar Lab Successfully unloaded!");
+        this.getLogger().info("Server Stonker made by Raznar Lab Successfully unloaded!");
         this.getLogger().info("Try our hosting! https://hosting.raznar.id/discord");
         this.getLogger().info("--------------------------------");
     }

@@ -1,4 +1,4 @@
-package id.raznar.serveroptimizer;
+package id.raznar.serverstonker;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;

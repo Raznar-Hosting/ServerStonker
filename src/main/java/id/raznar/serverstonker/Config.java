@@ -1,4 +1,4 @@
-package id.raznar.serveroptimizer;
+package id.raznar.serverstonker;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,7 +12,7 @@ public class Config {
     private static YamlConfiguration configurationFile;
 
     public static void setup() {
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin("ServerOptimizer").getDataFolder(), "config.yml");
+        file = new File(Bukkit.getServer().getPluginManager().getPlugin("ServerStonker").getDataFolder(), "config.yml");
         if(!file.exists()) {
             try {
                 file.createNewFile();
