@@ -5,12 +5,12 @@
 blocks-radius: 48 # Prevent mobs getting killed while players are in the radius (Default: 48 / 3 Chunks)
 auto-save: 1 # Save Progress automatically every x Minutes
 schedule-duration: 30 # Kill entities in unloaded chunks automatically every x Seconds
-schedule-log: false # Logs the schedule
-mob-movement: false # Enable Mob Move
-mob-interaction: false # Enable Mob Interact
-natural-spawn: false # Enable Mob Spawn Naturally
-chunk-spawn: false # Enable Mob Spawn while player generates a chunk
-spawner-spawn: false # Enable Mob spawn from spawner
+schedule-log: 'false' # Logs the schedule
+mob-movement: 'false' # Enable Mob Move
+mob-interaction: 'false' # Enable Mob Interact
+natural-spawn: 'false' # Enable Mob Spawn Naturally
+chunk-spawn: 'false' # Enable Mob Spawn while player generates a chunk
+spawner-spawn: 'false' # Enable Mob spawn from spawner
 worlds: # Enable Entity Cleaner at specified world
   - world
 whitelist-mob: # Prevent specified Mob getting killed or removed while plugin is running
@@ -22,4 +22,4 @@ whitelist-mob-ai: [] # Prevent specified Mob's AI getting removed while plugin i
 whitelist-tamed-mob-ai: # Prevent specified Tamed Mob's AI getting removed while plugin is running
   - WOLF
   - HORSE
-unload-chunk: true # Unload chunk when they're no players in the radius
+unload-chunk: 'true' # Unload chunk when they're no players in the radius
