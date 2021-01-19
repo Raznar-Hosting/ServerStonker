@@ -68,7 +68,7 @@ public class EntityListener implements Listener {
                 if (entityTamedList) {
                     Tameable tameable = (Tameable) entity;
                     if (!tameable.isTamed())
-                        ((LivingEntity) tameable).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
+                        (tameable).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
                 } else if (!entityList) {
                     ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0);
                 }
