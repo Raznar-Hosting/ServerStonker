@@ -1,6 +1,5 @@
 package id.raznar.serverstonker;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
@@ -55,7 +54,7 @@ public class EntityListener implements Listener {
      */
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
-        if(Config.get().getString("mob-movement").equals("false")) {
+        if(Config.get().getBoolean("mob-movement", true)) {
             Entity entity = e.getEntity();
             EntityType type = entity.getType();
             // Cancel if it's a custom mob
@@ -91,15 +90,15 @@ public class EntityListener implements Listener {
             if(entityList) {
                 return;
             }
-            if (Config.get().getString("natural-spawn").equals("false")) {
+            if (Config.get().getBoolean("natural-spawn", true)) {
                 if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL)
                     e.setCancelled(true);
             }
-            if (Config.get().getString("chunk-spawn").equals("false")) {
+            if (Config.get().getBoolean("chunk-spawn", true)) {
                 if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CHUNK_GEN)
                     e.setCancelled(true);
             }
-            if (Config.get().getString("spawner-spawn").equals("false")) {
+            if (Config.get().getBoolean("spawner-spawn", true)) {
                 if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER)
                     e.setCancelled(true);
             }
@@ -135,7 +134,7 @@ public class EntityListener implements Listener {
         }
         Chunk chunk = entity.getLocation().getChunk();
         entity.remove();
-        if(Config.get().getString("unload-chunk").equals("true")) {
+        if(Config.get().getBoolean("unload-chunk", true)) {
             if (chunk.isLoaded()) {
                 chunk.unload();
             }
