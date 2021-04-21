@@ -4,3 +4,7 @@ main: id.raznar.serverstonker.Main
 authors: [ xAbhista, BadAccuracyID ]
 description: Make your Minecraft Server TPS STONKS in a realtime
 website: https://lab.raznar.id
+commands:
+  serverstonker:
+    usage: /<command>
+    description: Main command

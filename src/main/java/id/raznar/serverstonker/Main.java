@@ -1,12 +1,16 @@
 package id.raznar.serverstonker;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
 public final class Main extends JavaPlugin {
+    public static Main plugin;
     @Override
     public void onEnable() {
+        plugin = this;
         this.loadConfig();
+        this.registerCommand();
         this.loadListener();
         this.getLogger().info("--------------------------------");
         this.getLogger().info("Server Stonker made by Raznar Lab Successfully loaded!");
@@ -30,14 +34,12 @@ public final class Main extends JavaPlugin {
         EntityListener entityListener = new EntityListener(this);
         entityListener.entitySchedule();
 
-        WorldSaver worldSaver = new WorldSaver(this);
-        worldSaver.schedule();
     }
     private void loadConfig() {
-        getConfig().options().copyDefaults();
-        saveDefaultConfig();
         Config.setup();
-        Config.get().options().copyDefaults(true);
-        Config.save();
+        saveDefaultConfig();
+    }
+    private void registerCommand() {
+        Bukkit.getPluginCommand("serverstonker").setExecutor(new Commands());
     }
 }

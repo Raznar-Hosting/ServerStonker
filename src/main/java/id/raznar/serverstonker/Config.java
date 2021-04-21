@@ -11,13 +11,14 @@ public class Config {
     private static File file;
     private static YamlConfiguration configurationFile;
 
+
     public static void setup() {
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin("ServerStonker").getDataFolder(), "config.yml");
+        file = new File(Main.plugin.getDataFolder(), "config.yml");
         if(!file.exists()) {
             try {
                 file.createNewFile();
             }catch(IOException error) {
-                Bukkit.getLogger().info(Utils.color("&cConfiguration ERROR!:"));
+                Bukkit.getLogger().info(Utils.colorize("&cInvalid Configuration!"));
             }
         }
         configurationFile = YamlConfiguration.loadConfiguration(file);
@@ -30,7 +31,7 @@ public class Config {
         try{
             configurationFile.save(file);
         }catch (IOException error) {
-            Bukkit.getLogger().info(Utils.color("&cConfiguration ERROR!"));
+            Bukkit.getLogger().info(Utils.colorize("&cInvalid Configuration"));
         }
     }
     public static void reload() {
